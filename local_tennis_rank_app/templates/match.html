@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title  %}
+Match data
+{% if message %}
+{{ message }}
+{% endif %}
+{% endblock  %}
+
+{% block lead  %}
+View Match
+{% endblock  %}
+
+{% block main_body  %}
+To add press the add button
+
+
+<form method="POST" action="/match">
+  <div class="form-group">
+    <label for="match_name">Match name</label>
+    <select name="match_name" class="form-control" id="exampleFormControlSelect1">
+      <option value=mouthly_match>mouthly_match</option>
+      <option value=spring_match>spring_match</option>
+      <option value=fall_match>fall_match</option>
+    </select>
+  </div>
+  
+  <label for="date">Match date</label>
+  <input name="match_date" class="form-control" type="text" placeholder="date">
+
+  <label for="winner1">Match winner</label>
+  <input name="match_winner1" class="form-control" type="text" placeholder="winner1">
+
+  <label for="winner2">Match winner</label>
+  <input name="match_winner2" class="form-control" type="text" placeholder="winner2">
+
+  <label for="loser1">Match loser</label>
+  <input name="match_loser1" class="form-control" type="text" placeholder="loser1">
+
+  <label for="loser2">Match loser</label>
+  <input name="match_loser2" class="form-control" type="text" placeholder="loser2">
+
+  <div class="form-group">
+    <label for="exampleFormControlSelect1">Winner Get Game</label>
+    <select name="match_winner_get_game" class="form-control" id="exampleFormControlSelect1">
+      <option value=6>6</option>
+      <option value=5>5</option>
+      <option value=4>4</option>
+      <option value=3>3</option>
+      <option value=2>2</option>
+      <option value=1>1</option>
+      <option value=0>0</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlSelect1">Loser Get Game</label>
+    <select name="match_loser_get_game" class="form-control" id="exampleFormControlSelect1">
+      <option value=0>0</option>
+      <option value=1>1</option>
+      <option value=2>2</option>
+      <option value=3>3</option>
+      <option value=4>4</option>
+      <option value=5>5</option>
+      <option value=6>6</option>
+    </select>
+  </div>
+  <input type="submit" class="btn btn-primary" value="Add" />
+</form>
+{% endblock  %}

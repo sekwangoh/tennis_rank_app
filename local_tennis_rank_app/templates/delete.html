@@ -1,0 +1,50 @@
+{% extends 'base.html' %} 
+{% block title %} 
+Delete Player Data
+{% if message %}
+{{ message }} 
+{% endif %} 
+{% endblock %} 
+{% block lead %} 
+See a data of an Player
+
+{% endblock %} 
+{% block main_body %} 
+This is player data
+
+<form method="POST" action="/match/delete">
+  <input name="player" class="form-control" type="text" placeholder="Player Name"/>
+  <br />
+  <input type="submit" class="btn btn-primary" value="Delete" />
+</form>
+
+<br />
+{% if data %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Match</th>
+      <th scope="col">Player</th>
+      <th scope="col">Player_partner</th>
+      <th scope="col">Player_opponent1</th>
+      <th scope="col">Player_opponent2</th>
+      <th scope="col">Num Of get game</th>
+      <th scope="col">Num Of lose game</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for player in data %}
+    <tr>
+      <th scope="row">{{ player.id }}</th>
+      <td>{{ player.winner1 }}</td>
+      <td>{{ player.winner2 }}</td>
+      <td>{{ player.loser1 }}</td>
+      <td>{{ player.loser2 }}</td>
+      <td>{{ player.winner_get_game }}</td>
+      <td>{{ player.loser_get_game }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %} 
+{% endblock %}

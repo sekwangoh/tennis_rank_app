@@ -1,19 +1,15 @@
-{% extends 'base.html' %} 
-{% block title %} 
-Delete Player Data
-{% if message %}
-{{ message }} 
-{% endif %} 
-{% endblock %} 
-{% block lead %} 
-See a data of an Player
-
-{% endblock %} 
-{% block main_body %} 
-This is player data
+{% extends 'base.html' %} {% block title %} Delete the Match {% if message %} {{
+message }} {% endif %} {% endblock %} {% block lead %} Delete match info {%
+endblock %} {% block main_body %}
 
 <form method="POST" action="/match/delete">
-  <input name="player" class="form-control" type="text" placeholder="Player Name"/>
+  <label for="exampleFormControlSelect1">delete Match</label>
+  <input
+    name="match_id"
+    class="form-control"
+    type="text"
+    placeholder="match_id"
+  />
   <br />
   <input type="submit" class="btn btn-primary" value="Delete" />
 </form>
@@ -23,13 +19,13 @@ This is player data
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">Match</th>
-      <th scope="col">Player</th>
-      <th scope="col">Player_partner</th>
-      <th scope="col">Player_opponent1</th>
-      <th scope="col">Player_opponent2</th>
-      <th scope="col">Num Of get game</th>
-      <th scope="col">Num Of lose game</th>
+      <th scope="col">Month</th>
+      <th scope="col">Winner1</th>
+      <th scope="col">Winner2</th>
+      <th scope="col">Loser1</th>
+      <th scope="col">Loser2</th>
+      <th scope="col">Num of winner game</th>
+      <th scope="col">Num of loser game</th>
     </tr>
   </thead>
   <tbody>
@@ -46,5 +42,4 @@ This is player data
     {% endfor %}
   </tbody>
 </table>
-{% endif %} 
-{% endblock %}
+{% endif %} {% endblock %}

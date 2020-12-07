@@ -1,40 +1,55 @@
-{% extends 'base.html' %} {% block title %} Update Name {% if message %} {{
-message }} {% endif %} {% endblock %} {% block lead %} Change an player name {%
-endblock %} {% block main_body %} This is player data
+{% extends 'base.html' %} {% block title %} Edit Name {% if message %} {{
+message }} {% endif %} {% endblock %} {% block lead %} Edit match info {%
+endblock %} {% block main_body %}
 
 <form method="POST" action="/match/update">
-  <label for="exampleFormControlSelect1">Select Match</label>
+  <label for="exampleFormControlSelect1">select match</label>
   <input
     name="match_id"
     class="form-control"
     type="text"
     placeholder="match_id"
   />
-  <br />
-  <input type="submit" class="btn btn-primary" value="Select Player" />
-  <br />
 
-  <label for="exampleFormControlSelect1">Current Player Name</label>
+  <label for="exampleFormControlSelect1">match infomation</label>
   <input
-    name="player1_name"
+    name="new_winner1_name"
     class="form-control"
     type="text"
-    placeholder="player1_name"
+    placeholder="new_winner1_name"
   />
-  <br />
-  <label for="exampleFormControlSelect1">edit_player1_name</label>
   <input
-    name="edit_player1_name"
+    name="new_winner2_name"
     class="form-control"
     type="text"
-    placeholder="edit_player1_name"
+    placeholder="new_winner2_name"
   />
-  <br />
-  <input type="submit" class="btn btn-primary" value="Update" />
+  <input
+    name="new_loser1_name"
+    class="form-control"
+    type="text"
+    placeholder="new_loser1_name"
+  />
+  <input
+    name="new_loser2_name"
+    class="form-control"
+    type="text"
+    placeholder="new_loser2_name"
+  />
+  <input
+    name="win_game"
+    class="form-control"
+    type="text"
+    placeholder="win_game"
+  />
+  <input
+    name="lose_game"
+    class="form-control"
+    type="text"
+    placeholder="lose_game"
+  />
+  <input type="submit" class="btn btn-primary" value="Edit" />
 </form>
-<!-- <form action="{{ url_for('match_routes.update') }}" method="POST">
-  <input type="submit" value="update" />
-</form> -->
 
 <br />
 {% if data %}
@@ -42,10 +57,10 @@ endblock %} {% block main_body %} This is player data
   <thead>
     <tr>
       <th scope="col">Match</th>
-      <th scope="col">Player1</th>
-      <th scope="col">Player2</th>
-      <th scope="col">Player3</th>
-      <th scope="col">Player4</th>
+      <th scope="col">winner1</th>
+      <th scope="col">winner2</th>
+      <th scope="col">loser1</th>
+      <th scope="col">loser2</th>
       <th scope="col">Num Of get game</th>
       <th scope="col">Num Of lose game</th>
     </tr>

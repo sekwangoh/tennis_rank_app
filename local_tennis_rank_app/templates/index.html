@@ -1,18 +1,17 @@
-{% extends 'base.html' %} {% block title %} Match Rank Application {% endblock
-%} {% block lead %} Post and share Match data {% endblock %} {% block main_body
-%} Welcome to the coffee menu web application {% if data %}
+{% extends 'base.html' %} {% block title %} Match Info {% endblock%} {% block
+lead %} Match data view {% endblock %} {% block main_body%} {% if data %}
 <table class="table">
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">match_name</th>
-      <th scope="col">Mouth</th>
-      <th scope="col">winner1</th>
-      <th scope="col">winner2</th>
-      <th scope="col">loser1</th>
-      <th scope="col">loser2</th>
-      <th scope="col">winner_get_game</th>
-      <th scope="col">loser_get_game</th>
+      <th scope="col">Match_name</th>
+      <th scope="col">Month</th>
+      <th scope="col">Winner1</th>
+      <th scope="col">Winner2</th>
+      <th scope="col">Loser1</th>
+      <th scope="col">Loser2</th>
+      <th scope="col">Num of winner game</th>
+      <th scope="col">Num of loser game</th>
     </tr>
   </thead>
   <tbody>

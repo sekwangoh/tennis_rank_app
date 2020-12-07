@@ -1,7 +1,8 @@
 from flask import Blueprint, render_template, request
 from local_tennis_rank_app.models import db, Match
 from sqlalchemy import or_, and_
-import pdb;
+from sqlalchemy.sql import func
+
 
 
 match_routes = Blueprint('match_routes', __name__)
@@ -24,6 +25,42 @@ def index():
                               ))
         db.session.commit()
     return render_template('match.html')
+
+@match_routes.route('/rank', methods=["GET", "POST"])
+def rank():
+    match_info = None
+    victory_count = None
+    defeat_count = None
+    get_win_game = None
+    get_lose_game = None
+    rankpoint = None
+    if request.method == "POST":
+        print(dict(request.form))
+
+        result = request.form
+        input_name = result['player']
+
+        #match_info = Match.query.filter(or_(Match.winner1==input_name, Match.winner2==input_name, Match.loser1==input_name, Match.loser2==input_name)) 
+
+        victory_info = Match.query.filter(or_(Match.winner1==input_name, Match.winner2==input_name))
+        victory_count = victory_info.count() 
+
+        defeat_info = Match.query.filter(or_(Match.loser1==input_name, Match.loser2==input_name))
+        defeat_count = defeat_info.count()
+
+        get_win_game = 6 * victory_count
+        get_lose_game = defeat_info
+
+        rankpoint =  victory_count*100 + get_win_game*10 
+        
+
+        # game_info = Match.query.filter(Match.winner_get_game==input_name)
+        # #, Match.loser_get_game==input_name))
+        # get_game_info = game_info
+
+        
+
+    return render_template("rank.html", victory = victory_count, defeat = defeat_count, game1 = get_win_game, data = get_lose_game, rank=rankpoint )
 
 @match_routes.route('/get', methods=["GET", "POST"])
 def get():
@@ -54,18 +91,23 @@ def get():
 
 @match_routes.route('/delete', methods=["GET", "POST"])
 def delete():
+    #match_data = None
     match_data = None
     if request.method == "POST":
         print(dict(request.form))
 
         result = request.form
-        input_name = result['player']
-        
-        match_info = Match.query.filter_by(winner1=input_name) or Match.query.filter_by(match_winner2=input_name)
+        # input_list = result['match_list'] 
+        # match_list = Match.query.filter(Match.id==input_list)
 
-        match_data = Match.query.all()
+        input_id = result['match_id'] 
+        match_info = Match.query.filter_by(id=input_id)
+
+        print(input_id)
+        print(match_info)
 
         match_info.delete()
+        match_data = Match.query.all()
 
         db.session.commit()
 
@@ -75,25 +117,30 @@ def delete():
 def update():
     match_info = None
     if request.method == "POST":
-        #print(dict(request.form))
+        print(dict(request.form))
 
         result = request.form
-        input_id = result['match_id'] 
-        match_info = Match.query.filter(Match.id==input_id)
-
         
-        old_name = result['player1_name']
-        new_name = result['edit_player1_name']
+        #old_name = result['old_winner1_name']
+        new_name1 = result['new_winner1_name']
+        new_name2 = result['new_winner2_name']
+        new_name3 = result['new_loser1_name']
+        new_name4 = result['new_loser2_name']
+        new_win_game = result['win_game']
+        new_lose_game = result['lose_game']
 
-        test_1 = match_info.first()
-        print(test_1.__dict__)
 
-        #pdb.set_trace() 
-        #breakpoint()
-        #Match.query.filter(Match.id==input_id).filter(Match.winner1==old_name).update({'winner1':new_name})
+        input_id = result['match_id'] 
+        
+        Match.query.filter(Match.id==input_id).update({'winner1':new_name1})
+        Match.query.filter(Match.id==input_id).update({'winner2':new_name2})
+        Match.query.filter(Match.id==input_id).update({'loser1':new_name3})
+        Match.query.filter(Match.id==input_id).update({'loser2':new_name4})
+        Match.query.filter(Match.id==input_id).update({'winner_get_game':new_win_game})
+        Match.query.filter(Match.id==input_id).update({'loser_get_game':new_lose_game})
 
-        #print(old_name)
-        #print(new_name)
+        #match_info = Match.query.filter(Match.id==input_id)
+        match_info = Match.query.all()
 
         db.session.commit()
 
